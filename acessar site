@@ -1,0 +1,36 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+import time
+
+# ----- Funções ------
+def acessa_site(site, tempo_espera):
+    navegador.get(site)
+    time.sleep(tempo_espera)
+
+def procura_by_xpath(xpath, chave, tempo_espera):
+    navegador.find_element('xpath', xpath).send_keys(chave)
+    time.sleep(tempo_espera)
+    
+def clica_xpath(xpath, tempo_espera):
+    navegador.find_element('xpath', xpath).click()
+    time.sleep(tempo_espera)https://github.com/jvitorac12/-D-VIDA-Automa-o-Selenium/tree/main				
+
+
+# Deixar navegador  visivel
+navegador_visivel = True 
+
+chrome_options = Options()
+if not navegador_visivel:
+    chrome_options.add_argument("--headless")  # Inicia o navegador em modo invisível
+
+# Inicializa o WebDriver na versão mais atual do ChromeDriver
+service = Service(ChromeDriverManager().install())
+				
+link = 'https://onedrive.live.com/login/'
+
+navegador = webdriver.Chrome(service=service, options=chrome_options)
+
+acessa_site(link, 3)
+procura_by_xpath('//*[@id="placeholder"]/div[2]/div/input', '123@hotmail.com', 3)
